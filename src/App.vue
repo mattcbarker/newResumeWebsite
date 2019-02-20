@@ -4,7 +4,8 @@
     <projects sectionName="Projects" v-bind:colors="colorTheme"/>
     <experience sectionName="Experience" v-bind:list="workExperience" v-bind:colors="colorTheme"/>
     <skillstab sectionName="Skills" v-bind:list="skills" v-bind:colors="colorTheme"/>
-    <!--{{ info.data.properties.periods[0].shortForecast }}-->
+    {{ weatherDesc }}
+    <footertab v-bind:colors="colorTheme"/>
   </div>
 </template>
 
@@ -13,6 +14,7 @@ import resumeHeader from "./components/resume-header.vue";
 import projects from "./components/projects.vue";
 import experience from "./components/experience.vue";
 import skillstab from "./components/skills.vue";
+import footertab from "./components/footer.vue";
 import axios from "axios";
 
 const workExperience = [
@@ -67,7 +69,8 @@ export default {
     resumeHeader,
     skillstab,
     experience,
-    projects
+    projects,
+    footertab
   },
   data() {
     return {
@@ -79,7 +82,6 @@ export default {
         sky: "#070c10",
         text: "white"
       },
-      finishedLoading: false
     };
   },
   mounted() {
@@ -92,6 +94,11 @@ export default {
           this.colorTheme.mountain = '#ebecf3'
           this.colorTheme.sky = '#afafaf'
           this.colorTheme.text = '#335aca'
+        }
+        if ( this.weatherDesc  === "Partly Sunny" || 'Mostly Sunny') {
+          this.colorTheme.mountain = '#4a4f52'
+          this.colorTheme.sky = '#9fc2de'
+          this.colorTheme.text = 'white'
         }
       })
       .catch(error => console.log(error))
