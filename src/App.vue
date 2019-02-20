@@ -1,19 +1,19 @@
 <template>
-  <div id="app" v-bind:style="{ backgroundColor: bgcolor}">
-    <resumeHeader bgcolor="bgcolor" v-bind:weather= info />
-    <projects sectionName="Projects"/>
-    <experience sectionName="Experience" v-bind:list="workExperience"/>
-    <skillstab sectionName="Skills" v-bind:list="skills"/>
-    {{ info.data.properties.periods[0].shortForecast }}
+  <div id="app" v-bind:style="{ backgroundColor: colorTheme.mountain }">
+    <resumeHeader v-bind:colors="colorTheme"/>
+    <projects sectionName="Projects" v-bind:colors="colorTheme"/>
+    <experience sectionName="Experience" v-bind:list="workExperience" v-bind:colors="colorTheme"/>
+    <skillstab sectionName="Skills" v-bind:list="skills" v-bind:colors="colorTheme"/>
+    <!--{{ info.data.properties.periods[0].shortForecast }}-->
   </div>
 </template>
 
 <script>
-import resumeHeader from "./components/resume-header.vue"
-import projects from "./components/projects.vue"
-import experience from "./components/experience.vue"
-import skillstab from "./components/skills.vue"
-import axios from "axios"
+import resumeHeader from "./components/resume-header.vue";
+import projects from "./components/projects.vue";
+import experience from "./components/experience.vue";
+import skillstab from "./components/skills.vue";
+import axios from "axios";
 
 const workExperience = [
   {
@@ -35,14 +35,15 @@ const workExperience = [
     title: "Independent Production Artist",
     dates: "June 2010 - September 2016",
     desc:
-      "Independent logo design (From sketches to Vector images), Independent development in the Unreal engine for the PC and Mac, created designs for3D printing."
+      "Independent logo design (From sketches to Vector images), Independent development in the Unreal engine for the PC and Mac, created designs for 3D printing."
   }
-]
+];
 const skills = [
   "HTML 5",
   "CSS 3",
   "Javascript",
   "Bootstrap 4",
+  "Vue.JS",
   "jQuery",
   "Adobe Photoshop",
   "Angular.JS",
@@ -58,7 +59,7 @@ const skills = [
   "Sublime2",
   "Google Search Console",
   "Google Maps API"
-]
+];
 
 export default {
   name: "app",
@@ -72,16 +73,31 @@ export default {
     return {
       skills: skills,
       workExperience: workExperience,
-      info: null,
-      bgcolor: "#122a39"
+      weatherDesc: String,
+      colorTheme: {
+        mountain: "#122a39",
+        sky: "#070c10",
+        text: "white"
+      },
+      finishedLoading: false
     };
   },
   mounted() {
     axios
       .get("https://api.weather.gov/gridpoints/eax/40,44/forecast?units=us")
-      .then(response => (this.info = response));
+      .then(response => {
+        this.weatherDesc = response.data.properties.periods[0].shortForecast;
+
+        if ( this.weatherDesc  === "Freezing Drizzle") {
+          this.colorTheme.mountain = '#ebecf3'
+          this.colorTheme.sky = '#afafaf'
+          this.colorTheme.text = '#335aca'
+        }
+      })
+      .catch(error => console.log(error))
+     
   }
-}
+};
 </script>
 
 <style>

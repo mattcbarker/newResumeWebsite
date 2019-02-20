@@ -1,9 +1,9 @@
 <template>
     <div class="container">
     <div class="row">
-      <h3 class="section-title">{{ sectionName }}</h3>
+      <h3 class="section-title" v-bind:style="{ color: colors.text }">{{ sectionName }}</h3>
       <div class="col-md-12">
-        <div class="expItem" v-for="skill in list" :key="skill.id">
+        <div class="expItem" v-for="skill in list" :key="skill.id" v-bind:style="{ color: colors.text }">
             <h3>{{ skill.company }}</h3>
             <span>{{ skill.title }}  /  </span>
             <span style="color:#bd1d1d">{{ skill.dates }} </span>
@@ -19,13 +19,13 @@ export default {
   props: {
     sectionName: String,
     list: Array,
+    colors: Object,
   }
 };
 </script>
 <style>
 .expItem{
     text-align:left;
-    color:white;
 }
 .expItem p{
     font-family: none;
