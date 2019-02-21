@@ -3,12 +3,12 @@
     <div class="row">
       <h3 class="section-title" v-bind:style="{ color: colors.text }">{{ sectionName }}</h3>
       <div class="col-md-12">
-        <div
-          class="listItem"
-          v-for="skill in list"
-          :key="skill.id"
-          v-bind:style="{ color: colors.text }"
-        >{{ skill }}</div>
+        <div v-for="cat in list" :key="cat.id" v-bind:style="{ color: colors.text }">
+          <h4>{{ cat.name }}</h4>
+          <div v-for="skill in cat.skills" :key="skill.id">
+            <b-img thumbnail fluid :src="skill.image" :alt="skill.skill"/>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -20,7 +20,8 @@ export default {
     sectionName: String,
     list: Array,
     colors: Object
-  }
+  },
+
 };
 </script>
 <style>
