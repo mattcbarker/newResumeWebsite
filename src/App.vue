@@ -1,7 +1,7 @@
 <template>
   <div id="app" v-bind:style="{ backgroundColor: colorTheme.mountain }">
     <resumeHeader v-bind:colors="colorTheme"/>
-    <projects sectionName="Projects" v-bind:colors="colorTheme"/>
+    <projects sectionName="Projects" v-bind:list="projectsList" v-bind:colors="colorTheme"/>
     <experience sectionName="Experience" v-bind:list="workExperience" v-bind:colors="colorTheme"/>
     <skillstab sectionName="Skills" v-bind:list="skills" v-bind:colors="colorTheme"/>
     {{ weatherDesc }}
@@ -10,12 +10,12 @@
 </template>
 
 <script>
-import resumeHeader from "./components/resume-header.vue";
-import projects from "./components/projects.vue";
-import experience from "./components/experience.vue";
-import skillstab from "./components/skills.vue";
-import footertab from "./components/footer.vue";
-import axios from "axios";
+import resumeHeader from "./components/resume-header.vue"
+import projects from "./components/projects.vue"
+import experience from "./components/experience.vue"
+import skillstab from "./components/skills.vue"
+import footertab from "./components/footer.vue"
+import axios from "axios"
 
 const workExperience = [
   {
@@ -39,7 +39,7 @@ const workExperience = [
     desc:
       "Independent logo design (From sketches to Vector images), Independent development in the Unreal engine for the PC and Mac, created designs for 3D printing."
   }
-];
+]
 const skills = [
   "HTML 5",
   "CSS 3",
@@ -61,7 +61,31 @@ const skills = [
   "Sublime2",
   "Google Search Console",
   "Google Maps API"
-];
+]
+const projectsList = [
+  {
+    img: 'https://warn.blob.core.windows.net/warn/0000112.gif',
+    title: 'Warn Industries 2018',
+    desc: 'Website for the popular aftermarket winching company, made while employed at KeystoneAuto',
+    urldest: 'https://www.warn.com/'
+
+  },
+  {
+    img: 'https://placehold.it/200x200',
+    title: 'test',
+    desc: 'description',
+    urldest: '#'
+
+  },
+  {
+    img: 'https://placehold.it/200x200',
+    title: 'test',
+    desc: 'description',
+    urldest: '#'
+
+  },
+  
+]
 
 export default {
   name: "app",
@@ -70,12 +94,13 @@ export default {
     skillstab,
     experience,
     projects,
-    footertab
+    footertab,
   },
   data() {
     return {
       skills: skills,
       workExperience: workExperience,
+      projectsList: projectsList,
       weatherDesc: String,
       colorTheme: {
         mountain: "#122a39",
@@ -119,10 +144,9 @@ export default {
 }
 .section-title {
   font-family: "Geo", sans-serif;
-  color: white;
   font-size: 2em;
   width: 100%;
-  margin: 20px;
+  padding: 10px 20px;
   text-align: left;
 }
 </style>
