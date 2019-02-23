@@ -1,17 +1,24 @@
 <template>
-  <div class="container">
-    <div class="row">
+  <b-container>
+    <b-row>
       <h3 class="section-title" v-bind:style="{ color: colors.text }">{{ sectionName }}</h3>
-      <div class="col-md-12">
-        <div v-for="cat in list" :key="cat.id" v-bind:style="{ color: colors.text }">
-          <h4>{{ cat.name }}</h4>
-          <div v-for="skill in cat.skills" :key="skill.id">
-            <b-img thumbnail fluid :src="skill.image" :alt="skill.skill"/>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    </b-row>
+    <b-row
+      v-for="cat in list"
+      :key="cat.id"
+      v-bind:style="{ color: colors.text }"
+      align-v="center"
+      align-h="center"
+    >
+      <h4 class="skillHeader">{{ cat.name }}</h4>
+      <b-col cols="4" lg="2" class="skillItem" v-for="skill in cat.skills" :key="skill.id">
+        <b-link :href="skill.url">
+          <b-img :src="skill.image" fluid :alt="skill.skill"/>
+          <h6>{{ skill.skill }}</h6>
+        </b-link>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 <script>
 export default {
@@ -20,13 +27,18 @@ export default {
     sectionName: String,
     list: Array,
     colors: Object
-  },
-
+  }
 };
 </script>
 <style>
-.listItem {
-  display: inline-block;
-  margin: 0 20px;
+.skillHeader {
+  width: 100%;
+  border-bottom: 2px solid;
+  margin-bottom: 20px;
+  text-align: left;
+  padding-left: 20px;
+}
+.skillItem {
+  padding: 20px;
 }
 </style>
