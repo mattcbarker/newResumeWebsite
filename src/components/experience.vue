@@ -28,6 +28,6 @@ export default {
     text-align:left;
 }
 .expItem p{
-    font-family: none;
+    font-family: Montserrat;
 }
 </style>

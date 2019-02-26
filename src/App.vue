@@ -10,13 +10,13 @@
 </template>
 
 <script>
-import resumeHeader from "./components/resume-header.vue"
-import projects from "./components/projects.vue"
-import experience from "./components/experience.vue"
-import skillstab from "./components/skills.vue"
-import footertab from "./components/footerTab.vue"
-import axios from "axios"
-import * as myResume from "./assets/js/myResume.js"
+import resumeHeader from "./components/resume-header.vue";
+import projects from "./components/projects.vue";
+import experience from "./components/experience.vue";
+import skillstab from "./components/skills.vue";
+import footertab from "./components/footerTab.vue";
+import axios from "axios";
+import * as myResume from "./assets/js/myResume.js";
 
 export default {
   name: "app",
@@ -25,7 +25,7 @@ export default {
     skillstab,
     experience,
     projects,
-    footertab,
+    footertab
   },
   data() {
     return {
@@ -39,47 +39,55 @@ export default {
         sky: "#070c10",
         text: "white"
       }
-    }
+    };
   },
   mounted() {
     axios
       .get("https://api.weather.gov/gridpoints/eax/40,44/forecast?units=us")
       .then(response => {
-        this.weatherDesc = response.data.properties.periods[0].shortForecast
-        // this.weatherDesc =' ' for testing various weather setups
+        this.weatherDesc = response.data.properties.periods[0].shortForecast;
+        //this.weatherDesc = "Partly Sunny"; //for testing various weather setups
+        console.log(this.weatherDesc);
         switch (this.weatherDesc) {
-          case "Cloudy then Chance Drizzle":
           case "Freezing Drizzle":
+            this.colorTheme.mountain = "#c9c9d0";
+            this.colorTheme.mountainSec = "#ebecf3";
+            this.colorTheme.sky = "#afafaf";
+            this.colorTheme.text = "#335aca";
+            break;
           case "Chance Drizzle":
-          case "Mostly Cloudy then Slight Chance Drizzle" :
-            this.colorTheme.mountain = "#c9c9d0"
-            this.colorTheme.mountainSec = "#ebecf3"
-            this.colorTheme.sky = "#afafaf"
-            this.colorTheme.text = "#335aca"
+          case "Mostly Cloudy then Slight Chance Drizzle":
+          case "Slight Chance Drizzle":
+          case "Cloudy then Chance Drizzle":
+          case "Cloudy" :
+            this.colorTheme.mountain = "#5a5850";
+            this.colorTheme.mountainSec = "#948558";
+            this.colorTheme.sky = "#b3b4b5";
+            this.colorTheme.text = "#f3f3f3";
             break;
           case "Partly Sunny":
           case "Mostly Sunny":
-            this.colorTheme.mountain = "#71684e"
-            this.colorTheme.mountainSec = "#b9a25b"
-            this.colorTheme.sky = "#9fc2de"
-            this.colorTheme.text = "white"
+            this.colorTheme.mountain = "#71684e";
+            this.colorTheme.mountainSec = "#b9a25b";
+            this.colorTheme.sky = "#9fc2de";
+            this.colorTheme.text = "white";
             break;
           case "Sunny":
-            this.colorTheme.mountain = "#5d4612"
-            this.colorTheme.mountainSec = "#c79628"
-            this.colorTheme.sky = "#84c5ea"
-            this.colorTheme.text = "white"
+            this.colorTheme.mountain = "#5d4612";
+            this.colorTheme.mountainSec = "#c79628";
+            this.colorTheme.sky = "#84c5ea";
+            this.colorTheme.text = "white";
             break;
           default:
-            this.colorTheme.mountain = "#122a39"
-            this.colorTheme.mountainSec = "#304352"
-            this.colorTheme.sky = "#070c10"
-            this.colorTheme.text = "white"
+            this.colorTheme.mountain = "#122a39";
+            this.colorTheme.mountainSec = "#304352";
+            this.colorTheme.sky = "#070c10";
+            this.colorTheme.text = "white";
         }
       })
-      .catch(error => console.log(error))
+      .catch(error => console.log(error));
   }
-}
+};
 </script>
 
 <style>

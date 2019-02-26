@@ -2,10 +2,10 @@
   <b-container fluid id="footer">
    <b-row align-v="center">
        <b-col>
-        <b-img fluid src="./assets/images/bio.jpg" />
+        <img src="../assets/images/bio.jpg" />
        </b-col>
       <b-col style="padding:20px">
-        <p  v-bind:style="{ color: colors.text, textAlign: 'left' }">I started in printmaking and sculpture background but eventually found those limiting based to my love of technology. With the possibilities that digital development offered, I pursued a digital 3D Design program through Gnomon School of Entertainment Design. From there I combined this background into programming and markup to set on a path of web development.</p>
+        <p v-bind:style="{ color: colors.text, textAlign: 'left' , fontFamily:'Montserrat' }">I started in printmaking and sculpture background but eventually found those limiting based to my love of technology. With the possibilities that digital development offered, I pursued a digital 3D Design program through Gnomon School of Entertainment Design. From there I combined this background into programming and markup to set on a path of web development.</p>
       </b-col>
       <b-col id="contactTab">
         <h3>Find Me:</h3>

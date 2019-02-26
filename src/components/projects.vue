@@ -27,4 +27,7 @@ export default {
 };
 </script>
 <style>
+.preview p{
+  font-family: Montserrat;
+}
 </style>
