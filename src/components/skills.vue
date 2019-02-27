@@ -37,24 +37,8 @@ export default {
   width: 100%;
   border-bottom: 2px solid;
   margin-bottom: 20px;
-  text-align: left;
-  padding-left: 20px;
 }
 .skillItem {
   padding: 20px;
-}
-.svgContainer {
-  display: inline-block;
-  position: relative;
-  width: 100%;
-  padding-bottom: 100%;
-  vertical-align: middle;
-  overflow: hidden;
-}
-.svg {
-  display: inline-block;
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 </style>

@@ -100,10 +100,14 @@ export default {
 }
 .section-title {
   font-family: "Geo", sans-serif;
-  font-size: 2em;
+  font-size: 3em;
   width: 100%;
-  text-align: left;
+  padding:20px;
   border-bottom: 2px solid;
+  border-top: 2px solid;
   margin-bottom: 20px;
+}
+.row{
+  margin-bottom:20px;
 }
 </style>

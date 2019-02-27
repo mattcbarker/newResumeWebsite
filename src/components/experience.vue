@@ -6,7 +6,7 @@
         <div class="expItem" v-for="skill in list" :key="skill.id" v-bind:style="{ color: colors.text }">
             <h3>{{ skill.company }}</h3>
             <span>{{ skill.title }}  /  </span>
-            <span style="color:#bd1d1d">{{ skill.dates }} </span>
+            <span v-bind:style="{ color: colors.mountainSec }">{{ skill.dates }} </span>
             <p> {{ skill.desc }} </p>
         </div>
       </div>
