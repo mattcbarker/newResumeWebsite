@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid id="footer">
+  <b-container fluid id="footer" v-bind:style="{ backgroundColor: colors.mountainSec}">
    <b-row align-v="center">
        <b-col>
         <img src="../assets/images/bio.jpg" />

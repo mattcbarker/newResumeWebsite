@@ -46,43 +46,44 @@ export default {
       .get("https://api.weather.gov/gridpoints/eax/40,44/forecast?units=us")
       .then(response => {
         this.weatherDesc = response.data.properties.periods[0].shortForecast;
-        //this.weatherDesc = "Partly Sunny"; //for testing various weather setups
+        //this.weatherDesc = " "; //for testing various weather setups
         console.log(this.weatherDesc);
         switch (this.weatherDesc) {
           case "Freezing Drizzle":
-            this.colorTheme.mountain = "#c9c9d0";
-            this.colorTheme.mountainSec = "#ebecf3";
-            this.colorTheme.sky = "#afafaf";
-            this.colorTheme.text = "#335aca";
+          case "Slight Chance Light Snow":
+            this.colorTheme.mountain ="#73726e"
+            this.colorTheme.mountainSec ="#bbbbbb"
+            this.colorTheme.sky = "#9c9898"
+            this.colorTheme.text = "white"
             break;
           case "Chance Drizzle":
           case "Mostly Cloudy then Slight Chance Drizzle":
           case "Slight Chance Drizzle":
           case "Cloudy then Chance Drizzle":
           case "Cloudy" :
-            this.colorTheme.mountain = "#5a5850";
-            this.colorTheme.mountainSec = "#948558";
-            this.colorTheme.sky = "#b3b4b5";
-            this.colorTheme.text = "#f3f3f3";
+            this.colorTheme.mountain = "#5a5850"
+            this.colorTheme.mountainSec = "#948558"
+            this.colorTheme.sky = "#b3b4b5"
+            this.colorTheme.text = "#f3f3f3"
             break;
           case "Partly Sunny":
           case "Mostly Sunny":
-            this.colorTheme.mountain = "#71684e";
-            this.colorTheme.mountainSec = "#b9a25b";
-            this.colorTheme.sky = "#9fc2de";
-            this.colorTheme.text = "white";
+            this.colorTheme.mountain = "#71684e"
+            this.colorTheme.mountainSec = "#b9a25b"
+            this.colorTheme.sky = "#9fc2de"
+            this.colorTheme.text = "white"
             break;
           case "Sunny":
-            this.colorTheme.mountain = "#5d4612";
-            this.colorTheme.mountainSec = "#c79628";
-            this.colorTheme.sky = "#84c5ea";
-            this.colorTheme.text = "white";
+            this.colorTheme.mountain = "#5d4612"
+            this.colorTheme.mountainSec = "#c79628"
+            this.colorTheme.sky = "#84c5ea"
+            this.colorTheme.text = "white"
             break;
           default:
-            this.colorTheme.mountain = "#122a39";
-            this.colorTheme.mountainSec = "#304352";
-            this.colorTheme.sky = "#070c10";
-            this.colorTheme.text = "white";
+            this.colorTheme.mountain = "#122a39"
+            this.colorTheme.mountainSec = "#304352"
+            this.colorTheme.sky = "#070c10"
+            this.colorTheme.text = "white"
         }
       })
       .catch(error => console.log(error));
@@ -92,12 +93,9 @@ export default {
 
 <style>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  background-color: #122a39;
   font-family: "Geo", sans-serif;
 }
 .section-title {
