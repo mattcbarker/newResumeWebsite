@@ -61,6 +61,7 @@ export default {
           case "Slight Chance Drizzle":
           case "Cloudy then Chance Drizzle":
           case "Cloudy" :
+          case "Mostly Cloudy":
             this.colorTheme.mountain = "#5a5850"
             this.colorTheme.mountainSec = "#948558"
             this.colorTheme.sky = "#b3b4b5"

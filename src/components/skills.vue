@@ -16,7 +16,7 @@
           <svg viewBox="0 0 150 150" preserveAspectRatio="none">
             <path fill-rule="evenodd" :fill="colors.mountainSec" :d="skill.svg"></path>
           </svg>
-          <h6 v-bind:style="{ color: colors.text }">{{ skill.skill }}</h6>
+          <h6 v-bind:style="{ color: colors.text}">{{ skill.skill }}</h6>
         </b-link>
       </b-col>
     </b-row>
@@ -40,5 +40,11 @@ export default {
 }
 .skillItem {
   padding: 20px;
+}
+.skillItem h6{
+  padding: 20px;
+}
+.skillItem a:hover{
+  color:white;
 }
 </style>
