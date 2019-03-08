@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     setWeather: (weather, colors) => {
-      weather.daytime = false;
+      //weather.daytime = false;
       if (weather.daytime === false) {
         colors.mountain = "#122a39";
         colors.mountainSec = "#304352";

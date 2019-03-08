@@ -59,7 +59,7 @@ export default {
   color: white;
 }
 .skillItem h6{
-  min-height: 40px;
+  
 }
 .fontSkill {
   height: 150px;
