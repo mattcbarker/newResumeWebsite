@@ -58,11 +58,13 @@ export default {
 .skillItem a:hover {
   color: white;
 }
+.skillItem h6{
+  min-height: 40px;
+}
 .fontSkill {
   height: 150px;
 }
 .testspan{
-  height:150px;
   margin-bottom:0;
   display: block;
 }

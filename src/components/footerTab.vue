@@ -1,6 +1,6 @@
 <template>
   <b-container fluid id="footer" v-bind:style="{ backgroundColor: colors.mountainSec}">
-   <b-row align-v="center">
+   <b-row align-v="center" :style="{marginBottom:0}">
        <b-col>
         <img src="../assets/images/bio.jpg" />
        </b-col>

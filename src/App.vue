@@ -34,16 +34,16 @@ export default {
     projects,
     footertab
   },
- 
+
   data() {
     return {
       skills: myResume.default.skills,
       workExperience: myResume.default.workExperience,
       projectsList: myResume.default.projectsList,
-      weatherDescription:{
+      weatherDescription: {
         shortDesc: String,
         poetic: String,
-        daytime: true,
+        daytime: true
       },
       colorTheme: {
         mountain: "#122a39",
@@ -55,60 +55,70 @@ export default {
   },
   methods: {
     setWeather: (weather, colors) => {
-      console.log(weather.poetic);
-      switch (weather.shortDesc) {
-        case "Freezing Drizzle":
-        case "Slight Chance Light Snow":
-          colors.mountain = "#73726e";
-          colors.mountainSec = "#bbbbbb";
-          colors.sky = "#9c9898";
-          colors.text = "white";
-          weather.poetic = "cold"
-          break;
-        case "Chance Drizzle":
-        case "Mostly Cloudy then Slight Chance Drizzle":
-        case "Slight Chance Drizzle":
-        case "Cloudy then Chance Drizzle":
-        case "Cloudy":
-        case "Mostly Cloudy":
-          colors.mountain = "#5a5850";
-          colors.mountainSec = "#948558";
-          colors.sky = "#b3b4b5";
-          colors.text = "#f3f3f3";
-          weather.poetic = "dreary"
-          break;
-        case "Partly Sunny":
-        case "Mostly Sunny":
-          colors.mountain = "#71684e";
-          colors.mountainSec = "#b9a25b";
-          colors.sky = "#9fc2de";
-          colors.text = "white";
-          weather.poetic = "lovely"
-          break;
-        case "Sunny":
-          colors.mountain = "#5d4612";
-          colors.mountainSec = "#c79628";
-          colors.sky = "#84c5ea";
-          colors.text = "white";
-          weather.poetic = "warm"
-          break;
-        default:
-          colors.mountain = "#122a39";
-          colors.mountainSec = "#304352";
-          colors.sky = "#070c10";
-          colors.text = "white";
-          weather.poetic = "wonderful"
+      weather.daytime = false;
+      if (weather.daytime === false) {
+        colors.mountain = "#122a39";
+        colors.mountainSec = "#304352";
+        colors.sky = "#070c10";
+        colors.text = "white";
+        //switch here for what the poetic should be
+        weather.poetic = "cold";
+      } else {
+        switch (weather.shortDesc) {
+          case "Freezing Drizzle":
+          case "Slight Chance Light Snow":
+            colors.mountain = "#73726e";
+            colors.mountainSec = "#bbbbbb";
+            colors.sky = "#9c9898";
+            colors.text = "white";
+            weather.poetic = "cold";
+            break;
+          case "Chance Drizzle":
+          case "Mostly Cloudy then Slight Chance Drizzle":
+          case "Slight Chance Drizzle":
+          case "Cloudy then Chance Drizzle":
+          case "Cloudy":
+          case "Mostly Cloudy":
+            colors.mountain = "#5a5850";
+            colors.mountainSec = "#948558";
+            colors.sky = "#b3b4b5";
+            colors.text = "#f3f3f3";
+            weather.poetic = "dreary";
+            break;
+          case "Partly Sunny":
+          case "Mostly Sunny":
+            colors.mountain = "#71684e";
+            colors.mountainSec = "#b9a25b";
+            colors.sky = "#9fc2de";
+            colors.text = "white";
+            weather.poetic = "lovely";
+            break;
+          case "Sunny":
+            colors.mountain = "#5d4612";
+            colors.mountainSec = "#c79628";
+            colors.sky = "#84c5ea";
+            colors.text = "white";
+            weather.poetic = "warm";
+            break;
+          default:
+            colors.mountain = "#122a39";
+            colors.mountainSec = "#304352";
+            colors.sky = "#070c10";
+            colors.text = "white";
+            weather.poetic = "wonderful";
+        }
       }
-    },
-
+    }
   },
   mounted() {
     axios
       .get("https://api.weather.gov/gridpoints/eax/40,44/forecast?units=us")
       .then(response => {
-        this.weatherDescription.shortDesc = response.data.properties.periods[0].shortForecast;
-        this.weatherDescription.daytime = response.data.properties.periods[0].isDaytime;
-        
+        this.weatherDescription.shortDesc =
+          response.data.properties.periods[0].shortForecast;
+        this.weatherDescription.daytime =
+          response.data.properties.periods[0].isDaytime;
+
         this.setWeather(this.weatherDescription, this.colorTheme);
       })
       .catch(error => console.log(error));
