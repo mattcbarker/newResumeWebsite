@@ -1,16 +1,13 @@
 <template>
   <div id="app" v-bind:style="{ backgroundColor: colorTheme.mountain }">
+    <!--div id="weatherdiv"></div-->
     <resumeHeader v-bind:colors="colorTheme"/>
-    <p
-      v-bind:style="{ color: colorTheme.text}"
-    >A {{ weatherDescPoetic }} day in Kansas City.</p>
-    <!--select v-model="weatherDesc">
-      <option disabled value>Please select one</option>
-      <option>Sunny</option>
-      <option>B</option>
-      <option>C</option>
-    </select>
-    {{ weatherDesc }}-->
+    <p v-bind:style="{ color: colorTheme.text}">
+      A {{ weatherDescription.poetic }}
+      <span v-if="weatherDescription.daytime == true">day</span>
+      <span v-else>night</span> in Kansas City.
+    </p>
+
     <projects sectionName="Projects" v-bind:list="projectsList" v-bind:colors="colorTheme"/>
     <experience sectionName="Experience" v-bind:list="workExperience" v-bind:colors="colorTheme"/>
     <skillstab sectionName="Skills" v-bind:list="skills" v-bind:colors="colorTheme"/>
@@ -37,13 +34,17 @@ export default {
     projects,
     footertab
   },
+ 
   data() {
     return {
       skills: myResume.default.skills,
       workExperience: myResume.default.workExperience,
       projectsList: myResume.default.projectsList,
-      weatherDesc: String,
-      weatherDescPoetic: String,
+      weatherDescription:{
+        shortDesc: String,
+        poetic: String,
+        daytime: true,
+      },
       colorTheme: {
         mountain: "#122a39",
         mountainSec: "#c79628",
@@ -52,55 +53,63 @@ export default {
       }
     };
   },
+  methods: {
+    setWeather: (weather, colors) => {
+      console.log(weather.poetic);
+      switch (weather.shortDesc) {
+        case "Freezing Drizzle":
+        case "Slight Chance Light Snow":
+          colors.mountain = "#73726e";
+          colors.mountainSec = "#bbbbbb";
+          colors.sky = "#9c9898";
+          colors.text = "white";
+          weather.poetic = "cold"
+          break;
+        case "Chance Drizzle":
+        case "Mostly Cloudy then Slight Chance Drizzle":
+        case "Slight Chance Drizzle":
+        case "Cloudy then Chance Drizzle":
+        case "Cloudy":
+        case "Mostly Cloudy":
+          colors.mountain = "#5a5850";
+          colors.mountainSec = "#948558";
+          colors.sky = "#b3b4b5";
+          colors.text = "#f3f3f3";
+          weather.poetic = "dreary"
+          break;
+        case "Partly Sunny":
+        case "Mostly Sunny":
+          colors.mountain = "#71684e";
+          colors.mountainSec = "#b9a25b";
+          colors.sky = "#9fc2de";
+          colors.text = "white";
+          weather.poetic = "lovely"
+          break;
+        case "Sunny":
+          colors.mountain = "#5d4612";
+          colors.mountainSec = "#c79628";
+          colors.sky = "#84c5ea";
+          colors.text = "white";
+          weather.poetic = "warm"
+          break;
+        default:
+          colors.mountain = "#122a39";
+          colors.mountainSec = "#304352";
+          colors.sky = "#070c10";
+          colors.text = "white";
+          weather.poetic = "wonderful"
+      }
+    },
+
+  },
   mounted() {
     axios
       .get("https://api.weather.gov/gridpoints/eax/40,44/forecast?units=us")
       .then(response => {
-        this.weatherDesc = response.data.properties.periods[0].shortForecast;
-        //this.weatherDesc = " "; //for testing various weather setups
-        console.log(this.weatherDesc);
-        switch (this.weatherDesc) {
-          case "Freezing Drizzle":
-          case "Slight Chance Light Snow":
-            this.colorTheme.mountain = "#73726e";
-            this.colorTheme.mountainSec = "#bbbbbb";
-            this.colorTheme.sky = "#9c9898";
-            this.colorTheme.text = "white";
-            this.weatherDescPoetic = "cold";
-            break;
-          case "Chance Drizzle":
-          case "Mostly Cloudy then Slight Chance Drizzle":
-          case "Slight Chance Drizzle":
-          case "Cloudy then Chance Drizzle":
-          case "Cloudy":
-          case "Mostly Cloudy":
-            this.colorTheme.mountain = "#5a5850";
-            this.colorTheme.mountainSec = "#948558";
-            this.colorTheme.sky = "#b3b4b5";
-            this.colorTheme.text = "#f3f3f3";
-            this.weatherDescPoetic = "dreary";
-            break;
-          case "Partly Sunny":
-          case "Mostly Sunny":
-            this.colorTheme.mountain = "#71684e";
-            this.colorTheme.mountainSec = "#b9a25b";
-            this.colorTheme.sky = "#9fc2de";
-            this.colorTheme.text = "white";
-            this.weatherDescPoetic = "bright";
-            break;
-          case "Sunny":
-            this.colorTheme.mountain = "#5d4612";
-            this.colorTheme.mountainSec = "#c79628";
-            this.colorTheme.sky = "#84c5ea";
-            this.colorTheme.text = "white";
-            this.weatherDescPoetic = "sunny";
-            break;
-          default:
-            this.colorTheme.mountain = "#122a39";
-            this.colorTheme.mountainSec = "#304352";
-            this.colorTheme.sky = "#070c10";
-            this.colorTheme.text = "white";
-        }
+        this.weatherDescription.shortDesc = response.data.properties.periods[0].shortForecast;
+        this.weatherDescription.daytime = response.data.properties.periods[0].isDaytime;
+        
+        this.setWeather(this.weatherDescription, this.colorTheme);
       })
       .catch(error => console.log(error));
   }
@@ -125,5 +134,12 @@ export default {
 }
 .row {
   margin-bottom: 20px;
+}
+#weatherdiv {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  background-color: rgba(24, 24, 25, 0.8);
 }
 </style>
